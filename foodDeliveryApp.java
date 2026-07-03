@@ -125,11 +125,19 @@ class Restaurant{
   private int restaurantId;
   private String restaurantName;
   private String restaurantLocation;
+  private long restaurantContactNumber;
+  private double restaurantRating;
+  private boolean restaurantIsOpen;
+  static int totalRestaurants;
 
-  public Restaurant(int restaurantId, String restaurantName, String restaurantLocation){
+  public Restaurant(int restaurantId,String restaurantName,String restaurantLocation,long restaurantContactNumber,double restaurantRating,boolean restaurantIsOpen){
   this.restaurantId = restaurantId;
   this.restaurantName = restaurantName;
   this.restaurantLocation = restaurantLocation;
+  this.restaurantContactNumber = restaurantContactNumber;
+  this.restaurantRating = restaurantRating;
+  this.restaurantIsOpen = restaurantIsOpen;
+  totalRestaurants++;
   }
 
   public void setRestaurantId(int restaurantId){
@@ -137,11 +145,42 @@ class Restaurant{
   }
 
   public void setRestaurantName(String restaurantName){
-   this.restaurantName = restaurantName;
+    try {
+        this.restaurantName = restaurantName;
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant name in correct format ");
+    }
   }
 
   public void setRestaurantLocation(String restaurantLocation){
-   this.restaurantLocation = restaurantLocation;
+        try {
+         this.restaurantLocation = restaurantLocation;
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant location in correct format ");
+    }
+  }
+
+      public void setRestaurantContactNumber(long restaurantContactNumber){
+           try {
+         this.restaurantContactNumber = restaurantContactNumber;
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant contact number in correct format ");
+    }
+  }
+
+  public void setRestaurantRating(double restaurantRating){
+               try {
+                if((restaurantRating>=0.0) && (restaurantRating<=5.0))
+                  this.restaurantRating = restaurantRating;
+                else 
+                     System.out.println(" Please enter Restaurant rating in correct limit ");
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant rating in correct format ");
+    }
+  }
+
+  public void setRestaurantStatus(boolean restaurantIsOpen){
+    this.restaurantIsOpen = restaurantIsOpen;
   }
 
     public int getRestaurantId(){
@@ -156,6 +195,67 @@ class Restaurant{
    return this.restaurantLocation;
   }
 
+  public long getRestaurantContactNumber(){
+    return this.restaurantContactNumber;
+  }
+
+  public double getRestaurantRating(){
+    return this.restaurantRating;
+  }
+
+  public boolean getRestaurantStatus(){
+    return this.restaurantIsOpen;
+  }
+
+  public void openRestaurant(){
+    this.restaurantIsOpen = true;
+  }
+
+  public void closeRestaurant(){
+    this.restaurantIsOpen = false;
+  }
+
+  public void changeRestaurantName(String newName){
+        try {
+        this.restaurantName = newName;
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant's new name in correct format ");
+    }
+  }
+
+  public void changeRestaurantLocation(String newLocation){
+            try {
+         this.restaurantLocation = newLocation;
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant's new location in correct format ");
+    }
+  }
+
+   public void updateRestaurantRating(double newRating){
+                   try {
+                if((newRating>=0.0) && (newRating<=5.0))
+                  this.restaurantRating = newRating;
+                else 
+                     System.out.println(" Please enter Restaurant,s new rating in correct limit ");
+    } catch (Exception e) {
+        System.out.println(" Please enter Restaurant's new rating in correct format ");
+    }
+   }
+
+   public int getTotalRestaurants(){
+    return  totalRestaurants;
+   }
+
+   public void displayRestaurantDetails(){
+    System.out.println("+=======================================+");
+    System.out.println(" Name "+this.restaurantName);
+    System.out.println(" Id "+this.restaurantId);
+    System.out.println(" Location "+this.restaurantLocation);
+    System.out.println(" Contact Number "+this.restaurantContactNumber);
+    System.out.println(" Status "+this.restaurantIsOpen);
+    System.out.println(" Rating "+this.restaurantRating);
+     System.out.println("+=======================================+");
+   }
 }
 
 class MenuItem{
