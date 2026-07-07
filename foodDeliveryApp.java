@@ -264,12 +264,21 @@ class MenuItem{
     private String itemName;
     private double itemPrice;
     private boolean itemAvailability;
+    private String itemDescription;
+    private String itemCategory;
+    private int itemPreparationTime;
+    static int totalMenuItems;
 
-    public MenuItem(int itemId, String itemName, double itemPrice, boolean itemAvailability){
+    public MenuItem(int itemId, String itemName, double itemPrice, boolean itemAvailability,String itemDescription,
+        String itemCategory,int itemPreparationTime){
     this.itemId = itemId;
     this.itemName = itemName;
     this.itemPrice = itemPrice;
     this.itemAvailability = itemAvailability;
+    this.itemDescription = itemDescription;
+    this.itemCategory = itemCategory;
+    this.itemPreparationTime = itemPreparationTime;
+    totalMenuItems++;
     }
 
     public void setItemId(int itemId){
@@ -367,11 +376,7 @@ class Order{
 class Main {
     public static void main (String[]args){
 
-        var customer1 = new Customer(0, null, 0, null);
-        var restaurant1 = new Restaurant(0, null, null);
-        var menuItem1 = new MenuItem(0, null, 0, false);
-        var order1 = new Order(0, customer1, menuItem1, restaurant1, 0);
-
+       
     }
 
 }
