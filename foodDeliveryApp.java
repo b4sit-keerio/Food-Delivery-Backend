@@ -1,3 +1,5 @@
+
+
 class Customer{
 
    private int customerId;
@@ -297,6 +299,18 @@ class MenuItem{
     this.itemAvailability = itemAvailability;
     }
 
+    public void setItemDescription(String itemDescription){
+        this.itemDescription = itemDescription;
+    }    
+
+    public void setItemCategory(String itemCategory){
+        this.itemCategory = itemCategory;
+    }
+
+    public void setItemPreparationTime(int itemPreparationTime){
+        this.itemPreparationTime = itemPreparationTime;
+    }
+
     public int getItemId(){
     return this.itemId;
     }
@@ -313,6 +327,79 @@ class MenuItem{
     return this.itemAvailability;
     }
 
+    public String getItemDescription(){
+        return this.itemDescription;
+    }
+
+    public String getItemCategory(){
+        return this.itemCategory;
+    }
+
+    public int getItemPreparartionTime(){
+        return this.itemPreparationTime;
+    }
+
+    public int getTotalMenuItems(){
+        return totalMenuItems;
+    }
+
+    public void changeItemName(String itemNewName){
+        try {
+            this.itemName = itemNewName;
+        } catch (Exception e) {
+           System.out.println(" Please enter Item's name in correct String format ");
+        }
+    }
+
+    public void changeItemDescription(String itemNewDescription){
+        try {
+             this.itemDescription = itemNewDescription;
+        } catch (Exception e) {
+            System.out.println(" Please enter Item's Description in correct String Format ");
+        }
+    }
+
+    public void updatePrice(double itemNewPrice){
+        try {
+             this.itemPrice = itemNewPrice;
+        } catch (Exception e) {
+            System.out.println(" Please enter Item's price in correct double format ");
+        }
+    }
+
+    public void changeItemCategory(String itemNewCategory){
+        try {
+             this.itemCategory = itemNewCategory;
+        } catch (Exception e) {
+            System.out.println(" Please enter Item's Category in correct String Format ");
+        }
+    }
+
+    public void markItemAvailable(){
+        this.itemAvailability = true;
+    }
+
+    public void markItemUnAvailable(){
+        this.itemAvailability = false;
+    }
+
+    public void changePreparationTime(int newItemPreparationTime){
+        try {
+            this.itemPreparationTime = newItemPreparationTime;
+        } catch (Exception e) {
+            System.out.println(" Please enter in correct Integer format Item's preparation time ");
+        }
+    }
+
+    public void displayMenuItem(){
+        System.out.println(" Item Id "+ this.itemId);
+        System.out.println(" Item Name "+this.itemName);
+        System.out.println(" Item Availability "+this.itemAvailability);
+        System.out.println(" Item Price "+this.itemPrice);
+        System.out.println(" Item Category "+this.itemCategory);
+        System.out.println(" Item Preparation Time "+this.itemPreparationTime);
+        System.out.println(" Item Description "+ this.itemDescription);
+    }
 }
 
 class Order{
