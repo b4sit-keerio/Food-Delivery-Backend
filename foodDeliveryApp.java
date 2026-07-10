@@ -1,4 +1,4 @@
-
+import java .util.Scanner;
 
 class Customer{
 
@@ -404,18 +404,27 @@ class MenuItem{
 
 class Order{
 
+    Scanner sc = new Scanner(System.in);
+
     private int orderId;
     private Customer customer;
     private MenuItem menuItem;
     private Restaurant restaurant;
     private int orderQuantity;
+    private double orderTotalAmount;
+    private String orderStatus;
+    static int totalOrders;
 
-    public Order(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity){
+    public Order(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
+        double orderTotalAmount,String orderStatus){
     this.orderId = orderId;
     this.customer = customer;
     this.menuItem = menuItem;
     this.restaurant = restaurant;
     this.orderQuantity = orderQuantity;
+    this.orderTotalAmount = orderTotalAmount;
+    this.orderStatus = orderStatus;
+    totalOrders++;
     }
 
     public void setOrderId(int orderId){
@@ -438,6 +447,14 @@ class Order{
     this.orderQuantity = orderQuantity;
     }
 
+    public void setOrderTotalAmount(double orderTotalAmount){
+        this.orderTotalAmount = orderTotalAmount;
+    }
+
+    public void setOrderStatus(String orderStatus){
+        this.orderStatus = orderStatus;
+    }
+
     public int getOrderId(){
     return this.orderId;
     }
@@ -457,7 +474,45 @@ class Order{
     public int getOrderQuantity(int orderQuantity){
     return this.orderQuantity;
     }
-    
+
+    public double getOrderTotalAmount(){
+        return this.orderTotalAmount;
+    }
+
+    public String getOrderStatus(){
+        return this.orderStatus;
+    }
+
+    public void changeOrderStatus(String newOrderStatus){
+     this.orderStatus = newOrderStatus;
+    }
+    placeOrder()
+
+    public void placeOrder(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
+        double orderTotalAmount,String orderStatus){
+             Order(orderId, customer,  menuItem,  restaurant,orderQuantity, orderTotalAmount, orderStatus);
+
+            System.out.println(" Please enter the order ID ");
+            int orderId = sc.nextInt();
+            sc.nextLine();
+            int customerId = sc.nextint();
+
+
+
+
+    }
+
+calculateTotal()
+
+changeQuantity(int newQuantity)
+
+confirmOrder()
+
+cancelOrder()
+
+displayOrderDetails()
+
+getTotalOrders()   // static
 }
 
 class Main {
