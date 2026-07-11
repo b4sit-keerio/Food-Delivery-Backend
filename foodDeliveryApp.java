@@ -1,6 +1,7 @@
-import java .util.Scanner;
+import java.util.Scanner;
 
 class Customer{
+   Scanner sc = new Scanner(System.in);
 
    private int customerId;
    private String customerName;
@@ -120,9 +121,28 @@ class Customer{
    System.out.println(" Account Status : "+this.getAccountStatus());
    System.out.println("+=======================================+");
    }
+
+   public void customerCreation(){
+    System.out.println(" Please enter the ID of the customer ");
+    int customerId = sc.nextInt();
+    sc.nextLine();
+    this.setCustomerId(customerId);
+    System.out.println(" Please enter the Name of the customer ");
+    String customerName = sc.nextLine();
+    this.setCustomerName(customerName);
+    System.out.println(" Please enter the phone number of the customer ");
+    long customerPhoneNumber = sc.nextLong();
+    sc.nextLine();
+    this.setCustomerPhoneNumber(customerPhoneNumber);
+    System.out.println(" Please enter the address of customer ");
+    String customerAddress = sc.nextLine();
+    Customer c = new Customer( customerId,customerName, customerPhoneNumber, customerAddress);
+   }
 }
 
 class Restaurant{
+
+    Scanner sc = new Scanner(System.in);
 
   private int restaurantId;
   private String restaurantName;
@@ -258,9 +278,30 @@ class Restaurant{
     System.out.println(" Rating "+this.restaurantRating);
      System.out.println("+=======================================+");
    }
+
+   public void restaurantCreation(){
+    System.out.println(" Please enter the ID of the restaurant ");
+    int restaurantId = sc.nextInt();
+    sc.nextLine();
+    System.out.println(" Please enter the name of the restaurant ");
+    String restaurantName = sc.nextLine();
+    System.out.println(" Please enter the Location of the restaurant ");
+    String restaurantLocation = sc.nextLine();
+    System.out.println(" Please enter Contact number of the restaurant ");
+    long restaurantContactNumber = sc.nextLong();
+    sc.nextLine();
+    boolean restaurantIsOpen = true;
+    System.out.println(" Please enter the rating of the restaurant ");
+    double restaurantRating = sc.nextDouble();
+    sc.nextLine();
+    Restaurant r = new Restaurant(restaurantId, restaurantName, restaurantLocation, restaurantContactNumber, restaurantRating, restaurantIsOpen);
+
+   }
 }
 
 class MenuItem{
+    
+    Scanner sc = new Scanner(System.in);
   
     private int itemId;
     private String itemName;
@@ -400,6 +441,26 @@ class MenuItem{
         System.out.println(" Item Preparation Time "+this.itemPreparationTime);
         System.out.println(" Item Description "+ this.itemDescription);
     }
+    
+    public void menuItemCreation(){
+        System.out.println( " Please enter the Item id ");
+        int itemId = sc.nextInt();
+        sc.nextLine();
+        System.out.println(" Please enter the name of the Item ");
+        String itemName = sc.nextLine();
+        boolean itemAvailability = true;
+        System.out.println(" Please enter the price of an item ");
+        double itemPrice = sc.nextDouble();
+        sc.nextLine();
+        System.out.println(" Please enter the Item category ");
+        String itemCategory = sc.nextLine();
+        System.out.println(" Please enter the preparation time of Item ");
+        int itemPreparationTime = sc.nextInt();
+        sc.nextLine();
+        System.out.println(" Please enter the Item description ");
+        String itemDescription = sc.nextLine();
+        MenuItem mt = new MenuItem(itemId, itemName, itemPrice, itemAvailability, itemDescription, itemCategory, itemPreparationTime);
+    }
 }
 
 class Order{
@@ -486,33 +547,39 @@ class Order{
     public void changeOrderStatus(String newOrderStatus){
      this.orderStatus = newOrderStatus;
     }
-    placeOrder()
+    // placeOrder()
 
-    public void placeOrder(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
-        double orderTotalAmount,String orderStatus){
-             Order(orderId, customer,  menuItem,  restaurant,orderQuantity, orderTotalAmount, orderStatus);
+    public void placeOrder(){
 
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
-            int customerId = sc.nextint();
-
-
-
+            customerCreation();
+            menuItemCreation();
+            restaurantCreation();
+            System.out.println(" Please enter the order quantity ");
+            int orderQuantity = sc.nextInt();
+            sc.nextLine();
+            System.out.println( " Please enter order total amount ");
+            double orderTotalAmount = sc.nextDouble();
+            sc.nextLine();
+            System.out.println(" Please enter the Order status ");
+            String orderStatus = sc.nextLine();
+            Order o = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, orderStatus);
 
     }
 
-calculateTotal()
+// calculateTotal()
 
-changeQuantity(int newQuantity)
+// changeQuantity(int newQuantity)
 
-confirmOrder()
+// confirmOrder()
 
-cancelOrder()
+// cancelOrder()
 
-displayOrderDetails()
+// displayOrderDetails()
 
-getTotalOrders()   // static
+// getTotalOrders()   // static
 }
 
 class Main {
