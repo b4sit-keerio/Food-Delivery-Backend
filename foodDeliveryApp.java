@@ -136,7 +136,7 @@ class Customer{
     this.setCustomerPhoneNumber(customerPhoneNumber);
     System.out.println(" Please enter the address of customer ");
     String customerAddress = sc.nextLine();
-    Customer c = new Customer( customerId,customerName, customerPhoneNumber, customerAddress);
+    this.setCustomerAddress(customerAddress);
    }
 }
 
@@ -283,19 +283,23 @@ class Restaurant{
     System.out.println(" Please enter the ID of the restaurant ");
     int restaurantId = sc.nextInt();
     sc.nextLine();
+    this.setRestaurantId(restaurantId);
     System.out.println(" Please enter the name of the restaurant ");
     String restaurantName = sc.nextLine();
+    this.setRestaurantName(restaurantName);
     System.out.println(" Please enter the Location of the restaurant ");
     String restaurantLocation = sc.nextLine();
+    this.setRestaurantLocation(restaurantLocation);
     System.out.println(" Please enter Contact number of the restaurant ");
     long restaurantContactNumber = sc.nextLong();
     sc.nextLine();
+    this.setRestaurantContactNumber(restaurantContactNumber);
     boolean restaurantIsOpen = true;
+    this.setRestaurantStatus(restaurantIsOpen);
     System.out.println(" Please enter the rating of the restaurant ");
     double restaurantRating = sc.nextDouble();
     sc.nextLine();
-    Restaurant r = new Restaurant(restaurantId, restaurantName, restaurantLocation, restaurantContactNumber, restaurantRating, restaurantIsOpen);
-
+    this.setRestaurantRating(restaurantRating);
    }
 }
 
@@ -446,20 +450,26 @@ class MenuItem{
         System.out.println( " Please enter the Item id ");
         int itemId = sc.nextInt();
         sc.nextLine();
+        this.setItemId(itemId);
         System.out.println(" Please enter the name of the Item ");
         String itemName = sc.nextLine();
+        this.setItemName(itemName);
         boolean itemAvailability = true;
+        this.setItemAvailability(itemAvailability);
         System.out.println(" Please enter the price of an item ");
         double itemPrice = sc.nextDouble();
         sc.nextLine();
+        this.setItemPrice(itemPrice);
         System.out.println(" Please enter the Item category ");
         String itemCategory = sc.nextLine();
+        this.setItemCategory(itemCategory);
         System.out.println(" Please enter the preparation time of Item ");
         int itemPreparationTime = sc.nextInt();
         sc.nextLine();
+        this.setItemPreparationTime(itemPreparationTime);
         System.out.println(" Please enter the Item description ");
         String itemDescription = sc.nextLine();
-        MenuItem mt = new MenuItem(itemId, itemName, itemPrice, itemAvailability, itemDescription, itemCategory, itemPreparationTime);
+        this.setItemDescription(itemDescription);
     }
 }
 
@@ -550,13 +560,16 @@ class Order{
     // placeOrder()
 
     public void placeOrder(){
-
+         
+           var customer = new Customer(0,null,0,null);
+           var restaurant = new Restaurant(0,null,null,0,0.0,false);
+           var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
-            customerCreation();
-            menuItemCreation();
-            restaurantCreation();
+            customer.customerCreation();
+            menuItem.menuItemCreation();
+            restaurant.restaurantCreation();
             System.out.println(" Please enter the order quantity ");
             int orderQuantity = sc.nextInt();
             sc.nextLine();
@@ -565,21 +578,31 @@ class Order{
             sc.nextLine();
             System.out.println(" Please enter the Order status ");
             String orderStatus = sc.nextLine();
-            Order o = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, orderStatus);
+            var order = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, orderStatus);
 
     }
 
+    public static int getTotalOrders(){  // static
+    return totalOrders;
+    }   
+
+    public void changeQuantity(int newQuantity){
+        this.orderQuantity = newQuantity;
+    }
+
+
+
+    public void displayOrderDetails(){
+        System.out.println(" Order Id "+ this.orderId);
+        System.out.println(" Order Total Amount "+this.orderTotalAmount);
+        System.out.println(" Ordered by customer "+this.getCustomer().getCustomerName());
+        System.out.println(" Order Quantity "+this.orderQuantity);
+        System.out.println(" Order Status "+this.orderStatus);
+    }
+
 // calculateTotal()
-
-// changeQuantity(int newQuantity)
-
 // confirmOrder()
-
 // cancelOrder()
-
-// displayOrderDetails()
-
-// getTotalOrders()   // static
 }
 
 class Main {
