@@ -7,8 +7,10 @@ class Customer{
    private String customerName;
    private long customerPhoneNumber;
    private String customerAddress;
-   private static int totalCustomers;
+   private static int totalCustomers = 0;
    private boolean accountStatus;
+
+   private static Customer customers [] = new Customer[10];
 
    public Customer(int customerId, String customerName,long customerPhoneNumber,String customerAddress){
     this.customerId = customerId;
@@ -16,7 +18,41 @@ class Customer{
     this.customerPhoneNumber =  customerPhoneNumber;
     this.customerAddress = customerAddress;
     this.accountStatus = true;
-    totalCustomers++;
+   }
+
+   public void addCustomer(){
+    System.out.println(" Please enter the ID of the customer ");
+    int customerId = sc.nextInt();
+    sc.nextLine();
+    this.setCustomerId(customerId);
+    System.out.println(" Please enter the Name of the customer ");
+    String customerName = sc.nextLine();
+    this.setCustomerName(customerName);
+    System.out.println(" Please enter the phone number of the customer ");
+    long customerPhoneNumber = sc.nextLong();
+    sc.nextLine();
+    this.setCustomerPhoneNumber(customerPhoneNumber);
+    System.out.println(" Please enter the address of customer ");
+    String customerAddress = sc.nextLine();
+    this.setCustomerAddress(customerAddress);
+     customers[totalCustomers++] = new Customer(customerId, customerName, customerPhoneNumber, customerAddress);
+   }
+
+   public Customer getCustomerById(){
+    System.out.println(" Please enter the Id for the Customer ");
+    int id = sc.nextInt();
+    boolean found = false;
+    Customer c = null;
+    for(int i=0;i<customers.length;i++){
+        if(customers[i].getCustomerId()==id){
+            found = true;
+            c = customers[i];
+        }
+    }
+    if(!found){
+        System.out.println(" Customer Not found ");
+    }
+    return c;
    }
 
    public void setCustomerId(int customerId){
@@ -122,22 +158,22 @@ class Customer{
    System.out.println("+=======================================+");
    }
 
-   public void customerCreation(){
-    System.out.println(" Please enter the ID of the customer ");
-    int customerId = sc.nextInt();
-    sc.nextLine();
-    this.setCustomerId(customerId);
-    System.out.println(" Please enter the Name of the customer ");
-    String customerName = sc.nextLine();
-    this.setCustomerName(customerName);
-    System.out.println(" Please enter the phone number of the customer ");
-    long customerPhoneNumber = sc.nextLong();
-    sc.nextLine();
-    this.setCustomerPhoneNumber(customerPhoneNumber);
-    System.out.println(" Please enter the address of customer ");
-    String customerAddress = sc.nextLine();
-    this.setCustomerAddress(customerAddress);
-   }
+//    public void customerCreation(){
+//     System.out.println(" Please enter the ID of the customer ");
+//     int customerId = sc.nextInt();
+//     sc.nextLine();
+//     this.setCustomerId(customerId);
+//     System.out.println(" Please enter the Name of the customer ");
+//     String customerName = sc.nextLine();
+//     this.setCustomerName(customerName);
+//     System.out.println(" Please enter the phone number of the customer ");
+//     long customerPhoneNumber = sc.nextLong();
+//     sc.nextLine();
+//     this.setCustomerPhoneNumber(customerPhoneNumber);
+//     System.out.println(" Please enter the address of customer ");
+//     String customerAddress = sc.nextLine();
+//     this.setCustomerAddress(customerAddress);
+//    }
 }
 
 class Restaurant{
@@ -150,7 +186,10 @@ class Restaurant{
   private long restaurantContactNumber;
   private double restaurantRating;
   private boolean restaurantIsOpen;
-  static int totalRestaurants;
+  static int totalRestaurants = 0 ;
+
+  private static Restaurant [] restaurants = new Restaurant [10]; 
+  totalRestaurants++;
 
   public Restaurant(int restaurantId,String restaurantName,String restaurantLocation,long restaurantContactNumber,double restaurantRating,boolean restaurantIsOpen){
   this.restaurantId = restaurantId;
@@ -159,7 +198,6 @@ class Restaurant{
   this.restaurantContactNumber = restaurantContactNumber;
   this.restaurantRating = restaurantRating;
   this.restaurantIsOpen = restaurantIsOpen;
-  totalRestaurants++;
   }
 
   public void setRestaurantId(int restaurantId){
@@ -279,7 +317,7 @@ class Restaurant{
      System.out.println("+=======================================+");
    }
 
-   public void restaurantCreation(){
+   public void addRestaurant(){
     System.out.println(" Please enter the ID of the restaurant ");
     int restaurantId = sc.nextInt();
     sc.nextLine();
@@ -300,6 +338,24 @@ class Restaurant{
     double restaurantRating = sc.nextDouble();
     sc.nextLine();
     this.setRestaurantRating(restaurantRating);
+    restaurants[totalRestaurants++] = new Restaurant(restaurantId, restaurantName, restaurantLocation, restaurantContactNumber, restaurantRating, restaurantIsOpen);
+   }
+
+    public Restaurant getRestaurantById(){
+    System.out.println(" Please enter the Id for the restaurant ");
+    int id = sc.nextInt();
+    boolean found = false;
+    Restaurant r = null;
+    for(int i=0;i<restaurants.length;i++){
+        if(Restaurant.restaurants[i].getRestaurantId()==id){
+            found = true;
+            r = restaurants[i];
+        }
+    }
+    if(!found){
+        System.out.println(" Restaurant Not found ");
+    }
+    return r;
    }
 }
 
@@ -316,6 +372,8 @@ class MenuItem{
     private int itemPreparationTime;
     static int totalMenuItems;
 
+    static  MenuItem [] menuItems = new MenuItem [10];
+
     public MenuItem(int itemId, String itemName, double itemPrice, boolean itemAvailability,String itemDescription,
         String itemCategory,int itemPreparationTime){
     this.itemId = itemId;
@@ -325,7 +383,6 @@ class MenuItem{
     this.itemDescription = itemDescription;
     this.itemCategory = itemCategory;
     this.itemPreparationTime = itemPreparationTime;
-    totalMenuItems++;
     }
 
     public void setItemId(int itemId){
@@ -364,11 +421,11 @@ class MenuItem{
     return this.itemName;
     }
 
-    public double getItemPrice(double itemPrice){
+    public double getItemPrice(){
     return this.itemPrice;
     }
 
-    public boolean getItemAvailability(boolean itemAvailability){
+    public boolean getItemAvailability(){
     return this.itemAvailability;
     }
 
@@ -446,7 +503,7 @@ class MenuItem{
         System.out.println(" Item Description "+ this.itemDescription);
     }
     
-    public void menuItemCreation(){
+    public void addMenuItem(){
         System.out.println( " Please enter the Item id ");
         int itemId = sc.nextInt();
         sc.nextLine();
@@ -470,7 +527,26 @@ class MenuItem{
         System.out.println(" Please enter the Item description ");
         String itemDescription = sc.nextLine();
         this.setItemDescription(itemDescription);
+        menuItems[totalMenuItems++] = new MenuItem(itemId, itemName, itemPrice, itemAvailability, itemDescription, itemCategory, itemPreparationTime);
     }
+
+    public MenuItem getMenuItemById(){
+    System.out.println(" Please enter the Id for the MenuItem ");
+    int id = sc.nextInt();
+    boolean found = false;
+    MenuItem mt = null;
+    for(int i=0;i<menuItems.length;i++){
+        if(MenuItem.menuItems[i].getItemId()==id){
+            found = true;
+            mt = menuItems[i];
+        }
+    }
+    if(!found){
+        System.out.println(" Item Not found in menu ");
+    }
+    return mt;
+   }
+
 }
 
 class Order{
@@ -486,6 +562,8 @@ class Order{
     private String orderStatus;
     static int totalOrders;
 
+    private static Order [] orders = new Order [10];
+
     public Order(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
         double orderTotalAmount,String orderStatus){
     this.orderId = orderId;
@@ -495,7 +573,6 @@ class Order{
     this.orderQuantity = orderQuantity;
     this.orderTotalAmount = orderTotalAmount;
     this.orderStatus = orderStatus;
-    totalOrders++;
     }
 
     public void setOrderId(int orderId){
@@ -503,19 +580,39 @@ class Order{
     }
 
     public void setCustomer(Customer customer){
-    this.customer = customer;
+        if(customer==null){
+            System.out.println(" Customer cannot be null ");
+        }
+        else {
+          this.customer = customer;
+        }
     }
 
     public void setMenuItem(MenuItem menuItem){
-    this.menuItem = menuItem;
+        if(menuItem==null){
+            System.out.println(" Menu item cannot be null ");
+        }
+        else{
+         this.menuItem = menuItem;
+        }
     }
 
     public void setRestaurant(Restaurant restaurant){
-    this.restaurant = restaurant;
+        if(restaurant ==null){
+        System.out.println(" Restaurant cannot be null ");
+        }
+        else {
+          this.restaurant = restaurant;
+        }
     }
 
     public void setOrderQuantity(int orderQuantity){
-    this.orderQuantity = orderQuantity;
+        if(orderQuantity>0){
+          this.orderQuantity = orderQuantity;
+        }
+       else {
+        System.out.println(" Order quatity should be greater than 0 ");
+       }
     }
 
     public void setOrderTotalAmount(double orderTotalAmount){
@@ -559,27 +656,35 @@ class Order{
     }
     // placeOrder()
 
-    public void placeOrder(){
-         
-           var customer = new Customer(0,null,0,null);
-           var restaurant = new Restaurant(0,null,null,0,0.0,false);
-           var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
+    public void placeOrder(){   
+        //    var customer = new Customer(0,null,0,null);
+        //    var restaurant = new Restaurant(0,null,null,0,0.0,false);
+        //    var menuItem = new MenuItem(0,null,0.0,true,null,null,0);
+           var customer;
+           var restaurant;
+           var menuItem;
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
-            customer.customerCreation();
-            menuItem.menuItemCreation();
-            restaurant.restaurantCreation();
+            customer.addCustomer();
+            menuItem.addMenuItem();
+            restaurant.addRestaurant();
             System.out.println(" Please enter the order quantity ");
             int orderQuantity = sc.nextInt();
             sc.nextLine();
             System.out.println( " Please enter order total amount ");
             double orderTotalAmount = sc.nextDouble();
             sc.nextLine();
-            System.out.println(" Please enter the Order status ");
-            String orderStatus = sc.nextLine();
-            var order = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, orderStatus);
-
+            for(int i=0;i<MenuItem.menuItems.length;i++){
+                if(MenuItem.menuItems[i].getItemAvailability()==false){
+                    System.out.println(" The order cannot be placed because Item is not available ");
+                }
+                else {
+                     System.out.println(" Dear Customer your order has placed ");
+                     orders[totalOrders++] = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, "Pending");
+                }
+            }
+        
     }
 
     public static int getTotalOrders(){  // static
@@ -590,7 +695,23 @@ class Order{
         this.orderQuantity = newQuantity;
     }
 
+    public double calculateTotal(){
+        return this.orderQuantity*this.menuItem.getItemPrice();
+    }
 
+    public void confrimOrder(){
+        this.orderStatus = "Confrimed";
+    }
+
+    public void cancelOrder(){
+        if((this.orderStatus=="delivered")||(this.orderStatus=="Delivered")){
+            System.out.println(" The order cannot be cancelled because it has delivered ");
+        }
+        else {
+            System.out.println(" The order has cancelled ");
+            this.orderStatus = "Cancelled ";
+        }
+    }
 
     public void displayOrderDetails(){
         System.out.println(" Order Id "+ this.orderId);
@@ -600,9 +721,6 @@ class Order{
         System.out.println(" Order Status "+this.orderStatus);
     }
 
-// calculateTotal()
-// confirmOrder()
-// cancelOrder()
 }
 
 class Main {
