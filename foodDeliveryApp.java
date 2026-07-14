@@ -10,7 +10,7 @@ class Customer{
    private static int totalCustomers = 0;
    private boolean accountStatus;
 
-   private static Customer customers [] = new Customer[10];
+    static Customer customers [] = new Customer[10];
 
    public Customer(int customerId, String customerName,long customerPhoneNumber,String customerAddress){
     this.customerId = customerId;
@@ -189,7 +189,7 @@ class Restaurant{
   private boolean restaurantIsOpen;
   static int totalRestaurants = 0 ;
 
-  private static Restaurant [] restaurants = new Restaurant [10]; 
+  static Restaurant [] restaurants = new Restaurant [10]; 
 
   public Restaurant(int restaurantId,String restaurantName,String restaurantLocation,long restaurantContactNumber,double restaurantRating,boolean restaurantIsOpen){
   this.restaurantId = restaurantId;
@@ -373,7 +373,7 @@ class MenuItem{
     private int itemPreparationTime;
     static int totalMenuItems;
 
-    static  MenuItem [] menuItems = new MenuItem [10];
+      MenuItem [] menuItems = new MenuItem [10];
 
     public MenuItem(int itemId, String itemName, double itemPrice, boolean itemAvailability,String itemDescription,
         String itemCategory,int itemPreparationTime){
@@ -564,7 +564,7 @@ class Order{
     private String orderStatus;
     static int totalOrders;
 
-    private static Order [] orders = new Order [10];
+     static Order [] orders = new Order [10];
 
     public Order(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
         double orderTotalAmount,String orderStatus){
@@ -723,8 +723,29 @@ class Order{
 
 class Main {
     public static void main (String[]args){
+   
+         System.out.println(" ======================================================== ");
+         System.out.println("                  WELCOME TO THE QUICKBITE                ");
+         System.out.println(" ======================================================== ");
+        var customer = new Customer(0,null,0,null);  
+        var restaurant = new Restaurant(0,null,null,0,0.0,false);
+        var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
+         customer.addCustomer();
+         restaurant.addRestaurant();
+         menuItem.addMenuItem();
 
+         for(int i=0;i<Restaurant.totalRestaurants;i++){
+            if(Restaurant.restaurants[i].getRestaurantId()==restaurant.getRestaurantId()){
+                restaurant.displayRestaurantDetails();
+            }
+         }
+
+            for(int i=0;i<MenuItem.totalMenuItems;i++){
+              menuItem.displayMenuItem();
+            }
+            
+         }
+         
        
     }
 
-}
