@@ -7,7 +7,7 @@ class Customer{
    private String customerName;
    private long customerPhoneNumber;
    private String customerAddress;
-   private static int totalCustomers = 0;
+   static int totalCustomers = 0;
    private boolean accountStatus;
 
     static Customer customers [] = new Customer[10];
@@ -371,9 +371,9 @@ class MenuItem{
     private String itemDescription;
     private String itemCategory;
     private int itemPreparationTime;
-    static int totalMenuItems;
+    static int totalMenuItems = 0 ;
 
-      MenuItem [] menuItems = new MenuItem [10];
+    static MenuItem [] menuItems = new MenuItem [10];
 
     public MenuItem(int itemId, String itemName, double itemPrice, boolean itemAvailability,String itemDescription,
         String itemCategory,int itemPreparationTime){
@@ -564,7 +564,7 @@ class Order{
     private String orderStatus;
     static int totalOrders;
 
-     static Order [] orders = new Order [10];
+    static Order [] orders = new Order [10];
 
     public Order(int orderId, Customer customer, MenuItem menuItem, Restaurant restaurant,int orderQuantity,
         double orderTotalAmount,String orderStatus){
@@ -658,9 +658,9 @@ class Order{
     }
  
     public void placeOrder(){  
-           var customer = new Customer(0,null,0,null);  
-           var restaurant = new Restaurant(0,null,null,0,0.0,false);
-           var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
+        //    var customer = new Customer(0,null,0,null);  
+        //    var restaurant = new Restaurant(0,null,null,0,0.0,false);
+        //    var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
@@ -679,7 +679,8 @@ class Order{
                 }
                 else {
                      System.out.println(" Dear Customer your order has placed ");
-                     orders[totalOrders++] = new Order(orderId, customer, menuItem, restaurant, orderQuantity, orderTotalAmount, "Pending");
+                     orders[totalOrders++] =
+                      new Order(orderId, this.customer, this.menuItem, this.restaurant, orderQuantity, orderTotalAmount, "Pending");
                 }
             }
         
@@ -727,22 +728,27 @@ class Main {
          System.out.println(" ======================================================== ");
          System.out.println("                  WELCOME TO THE QUICKBITE                ");
          System.out.println(" ======================================================== ");
-        var customer = new Customer(0,null,0,null);  
-        var restaurant = new Restaurant(0,null,null,0,0.0,false);
-        var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
-         customer.addCustomer();
-         restaurant.addRestaurant();
-         menuItem.addMenuItem();
+        Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);
+        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        Customer.customers[Customer.totalCustomers].addCustomer();
 
-         for(int i=0;i<Restaurant.totalRestaurants;i++){
-            if(Restaurant.restaurants[i].getRestaurantId()==restaurant.getRestaurantId()){
-                restaurant.displayRestaurantDetails();
-            }
-         }
+        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant();
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+
+        Restaurant.restaurants[Restaurant.totalRestaurants-1].displayRestaurantDetails();
 
             for(int i=0;i<MenuItem.totalMenuItems;i++){
-              menuItem.displayMenuItem();
+             MenuItem.menuItems[MenuItem.totalMenuItems-1].displayMenuItem();
             }
+
+            Order.orders[Order.totalOrders] = 
+            new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
+                Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
+                Order.orders[Order.totalOrders].placeOrder();
+
+                 Order.orders[Order.totalOrders-1].displayOrderDetails();
+
             
          }
          
