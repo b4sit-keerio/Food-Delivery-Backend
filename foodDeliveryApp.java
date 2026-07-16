@@ -664,26 +664,29 @@ class Order{
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
-            customer.addCustomer();
-            menuItem.addMenuItem();
-            restaurant.addRestaurant();
+            // customer.addCustomer();
+            // menuItem.addMenuItem();
+            // restaurant.addRestaurant();
             System.out.println(" Please enter the order quantity ");
             int orderQuantity = sc.nextInt();
             sc.nextLine();
-            System.out.println( " Please enter order total amount ");
-            double orderTotalAmount = sc.nextDouble();
-            sc.nextLine();
-            for(int i=0;i<MenuItem.menuItems.length;i++){
-                if(MenuItem.menuItems[i].getItemAvailability()==false){
+            // System.out.println( " Please enter order total amount ");
+            double orderTotalAmount = 0.0;
+            for(int i=0;i<MenuItem.totalMenuItems;i++){
+                if(MenuItem.menuItems[i].getItemId()==this.menuItem.getItemId()){
+                 orderTotalAmount = this.menuItem.getItemPrice()*orderQuantity;
+                }
+            }
+           
+            if(this.menuItem.getItemAvailability()==false){
                     System.out.println(" The order cannot be placed because Item is not available ");
                 }
                 else {
                      System.out.println(" Dear Customer your order has placed ");
-                     orders[totalOrders++] =
+                     this.orders[totalOrders++] =
                       new Order(orderId, this.customer, this.menuItem, this.restaurant, orderQuantity, orderTotalAmount, "Pending");
-                }
-            }
-        
+              }
+
     }
 
     public static int getTotalOrders(){  // static
@@ -728,28 +731,41 @@ class Main {
          System.out.println(" ======================================================== ");
          System.out.println("                  WELCOME TO THE QUICKBITE                ");
          System.out.println(" ======================================================== ");
-        Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);
-        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
-        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
         Customer.customers[Customer.totalCustomers].addCustomer();
 
-        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant();
-        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 1
 
-        Restaurant.restaurants[Restaurant.totalRestaurants-1].displayRestaurantDetails();
 
-            for(int i=0;i<MenuItem.totalMenuItems;i++){
-             MenuItem.menuItems[MenuItem.totalMenuItems-1].displayMenuItem();
-            }
+        // Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+        // Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 2
+
+
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
+        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        // Restaurant.restaurants[Restaurant.totalRestaurants-1].displayRestaurantDetails();
+
+            // for(int i=0;i<MenuItem.totalMenuItems;i++){
+            //  MenuItem.menuItems[i].displayMenuItem();
+            // }
+
+            // for (int i=0;i<Restaurant.totalRestaurants;i++) {
+            //     Restaurant.restaurants[i].displayRestaurantDetails();
+            // }
 
             Order.orders[Order.totalOrders] = 
             new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
                 Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
                 Order.orders[Order.totalOrders].placeOrder();
-
                  Order.orders[Order.totalOrders-1].displayOrderDetails();
 
-            
          }
          
        
