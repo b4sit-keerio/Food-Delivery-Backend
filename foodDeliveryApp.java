@@ -658,26 +658,18 @@ class Order{
     }
  
     public void placeOrder(){  
-        //    var customer = new Customer(0,null,0,null);  
-        //    var restaurant = new Restaurant(0,null,null,0,0.0,false);
-        //    var menuItem = new MenuItem(0,null,0.0,false,null,null,0);
             System.out.println(" Please enter the order ID ");
             int orderId = sc.nextInt();
             sc.nextLine();
-            // customer.addCustomer();
-            // menuItem.addMenuItem();
-            // restaurant.addRestaurant();
             System.out.println(" Please enter the order quantity ");
             int orderQuantity = sc.nextInt();
             sc.nextLine();
-            // System.out.println( " Please enter order total amount ");
             double orderTotalAmount = 0.0;
             for(int i=0;i<MenuItem.totalMenuItems;i++){
                 if(MenuItem.menuItems[i].getItemId()==this.menuItem.getItemId()){
                  orderTotalAmount = this.menuItem.getItemPrice()*orderQuantity;
                 }
             }
-           
             if(this.menuItem.getItemAvailability()==false){
                     System.out.println(" The order cannot be placed because Item is not available ");
                 }
@@ -686,7 +678,6 @@ class Order{
                      this.orders[totalOrders++] =
                       new Order(orderId, this.customer, this.menuItem, this.restaurant, orderQuantity, orderTotalAmount, "Pending");
               }
-
     }
 
     public static int getTotalOrders(){  // static
@@ -751,58 +742,128 @@ class Main {
              System.out.println(" Choose an option : ");
              int option11 = sc.nextInt();
              sc.nextLine();
+             do{
              if(option11==1){
-                 // Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
-                // Customer.customers[Customer.totalCustomers].addCustomer();
-                // Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
-                // Customer.customers[Customer.totalCustomers].addCustomer();
+                 Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
+                Customer.customers[Customer.totalCustomers].addCustomer();
+                Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
+                Customer.customers[Customer.totalCustomers].addCustomer();
              }
              else if(option11==2){
-                // for(int i=0;i<Customer.totalCustomers;i++){
-                //     Customer.customers[i].displayCustomerDetails();
-                //     System.out.println();
-                // }
+                for(int i=0;i<Customer.totalCustomers;i++){
+                    Customer.customers[i].displayCustomerDetails();
+                    System.out.println();
+                }
              }
              else if(option11==3){
-                
+                System.out.println(" Please enter the customer ID ");
+                int customerIdForSearch = sc.nextInt();
+                sc.nextLine();
+                boolean customerFound = false;
+                for(int i=0;i<Customer.totalCustomers;i++){
+                   if(Customer.customers[i].getCustomerId()==customerIdForSearch){
+                     customerFound = true;
+                     Customer.customers[i].displayCustomerDetails();
+                    }
+                }
+                  if(!customerFound){
+                        System.out.println(" The entered Id is not found ");
+                    }
              }
+             else if(option11==4){
+                System.out.println(" Please enter the customer ID which you want to update ");
+                int idToUpdateCustomer = sc.nextInt();
+                sc.nextLine();
+                boolean customerFound = false;
+                 for(int i=0;i<Customer.totalCustomers;i++){
+                   if(Customer.customers[i].getCustomerId()==idToUpdateCustomer){
+                     customerFound = true;
+                     System.out.println(" Please select which thing you want to update ");//name,phone,address
+                     System.out.println(" ======================================================== ");
+                     System.out.println("               1. Customer's Name                         ");
+                     System.out.println("               2. Customer's Phone Number                 ");
+                     System.out.println("               3. Customer's Address                      ");
+                     System.out.println(" ======================================================== ");
+                     int option14 = sc.nextInt();
+                     sc.nextLine();
+                     if(option14==1){
+                        System.out.println(" Please enter new name ");
+                        String customerNewName = sc.nextLine();
+                        Customer.customers[i].changeCustomerName(customerNewName);
+                     }
+                     else if(option14==2){
+                        System.out.println(" Please enter new phone number ");
+                        long customerNewPhone = sc.nextInt();
+                        sc.nextLine();
+                        Customer.customers[i].changeCustomerPhoneNumber(customerNewPhone);
+                     }
+                     else if(option14==3){
+                        System.out.println(" Please enter new Address  ");
+                        String customerNewAddress = sc.nextLine();
+                        Customer.customers[i].changeCustomerAddress(customerNewAddress);
+                     }
+
+                    } 
+             }
+             if(!customerFound){
+                       System.out.println(" The Customer doesn't exists "); 
+                    }
          }
+         else if(option11==5){
+            System.out.println(" Please enter the customer ID which you want to deactivate ");
+                int idToDeactivateCustomer = sc.nextInt();
+                sc.nextLine();
+                boolean customerFound = false;
+                   for(int i=0;i<Customer.totalCustomers;i++){
+                   if(Customer.customers[i].getCustomerId()==idToDeactivateCustomer){
+                     customerFound = true;
+                     Customer.customers[i].deActivateCustomerAccount(false);
+                    }
+                }
+                  if(!customerFound){
+                        System.out.println(" The entered Id is not found ");
+                    }
+         }
+
+        }while(option11!=6);
         
-
-        // Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
-        // Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 1
-
-
-        // Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
-        // Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 2
-
-
-        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
-        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
-        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
-        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
-        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
-        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
-        // MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
-        // MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
-        // Restaurant.restaurants[Restaurant.totalRestaurants-1].displayRestaurantDetails();
-
-        //     for(int i=0;i<MenuItem.totalMenuItems;i++){
-        //      MenuItem.menuItems[i].displayMenuItem();
-        //     }
-
-        //     for (int i=0;i<Restaurant.totalRestaurants;i++) {
-        //         Restaurant.restaurants[i].displayRestaurantDetails();
-        //     }
-
-        //     Order.orders[Order.totalOrders] = 
-        //     new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
-        //         Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
-        //         Order.orders[Order.totalOrders].placeOrder();
-        //          Order.orders[Order.totalOrders-1].displayOrderDetails();
-
          }
+         
+
+        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 1
+
+
+        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 2
+
+
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
+        Restaurant.restaurants[Restaurant.totalRestaurants-1].displayRestaurantDetails();
+
+            for(int i=0;i<MenuItem.totalMenuItems;i++){
+             MenuItem.menuItems[i].displayMenuItem();
+            }
+
+            for (int i=0;i<Restaurant.totalRestaurants;i++) {
+                Restaurant.restaurants[i].displayRestaurantDetails();
+            }
+
+            Order.orders[Order.totalOrders] = 
+            new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
+                Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
+                Order.orders[Order.totalOrders].placeOrder();
+                 Order.orders[Order.totalOrders-1].displayOrderDetails();
+
          
        
     }
 
+}
