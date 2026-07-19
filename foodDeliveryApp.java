@@ -731,6 +731,7 @@ class Main {
          int option1 = sc.nextInt();
          sc.nextLine();
          if(option1==1){
+             do{
             System.out.println(" ======================================================== ");
             System.out.println("               1. Register Customer                       ");
             System.out.println("               2. Veiw All Customers                      ");
@@ -739,10 +740,9 @@ class Main {
             System.out.println("               5. Deactivate Customer                     ");
             System.out.println("               6. Back                                    ");
             System.out.println(" ======================================================== ");
-             System.out.println(" Choose an option : ");
+            System.out.println(" Choose an option : ");
              int option11 = sc.nextInt();
              sc.nextLine();
-             do{
              if(option11==1){
                  Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
                 Customer.customers[Customer.totalCustomers].addCustomer();
@@ -825,8 +825,25 @@ class Main {
                     }
          }
 
-        }while(option11!=6);
+        }while(option1!=6);
         
+         }
+         else if (option1==2){
+            do{
+            System.out.println(" ======================================================== ");
+            System.out.println("                  1. Register Restaurant                  ");
+            System.out.println("                  2. Veiw All Restaurants                 ");
+            System.out.println("                  3. Search Restaurant                    ");
+            System.out.println("                  4. Update Restaurant                    ");
+            System.out.println("                  5. Open Restaurant                      ");
+            System.out.println("                  6. Close Restaurant                     ");
+            System.out.println("                  7. Back                                 ");
+            System.out.println(" ======================================================== ");
+            int option11 = sc.nextInt();
+            sc.nextLine();
+
+
+        }while(option11!=7);
          }
          
 
