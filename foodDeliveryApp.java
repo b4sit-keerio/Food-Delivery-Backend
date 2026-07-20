@@ -728,6 +728,8 @@ class Main {
          System.out.println("                  5. Exit                                 ");
          System.out.println(" ======================================================== ");
          System.out.println(" Choose an option : ");
+         int optionCustomer;
+         int optionRestaurant;
          int option1 = sc.nextInt();
          sc.nextLine();
          if(option1==1){
@@ -741,21 +743,21 @@ class Main {
             System.out.println("               6. Back                                    ");
             System.out.println(" ======================================================== ");
             System.out.println(" Choose an option : ");
-             int option11 = sc.nextInt();
+             optionCustomer = sc.nextInt();
              sc.nextLine();
-             if(option11==1){
+             if(optionCustomer==1){
                  Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
                 Customer.customers[Customer.totalCustomers].addCustomer();
                 Customer.customers[Customer.totalCustomers] = new Customer(0,null,0,null);  
                 Customer.customers[Customer.totalCustomers].addCustomer();
              }
-             else if(option11==2){
+             else if(optionCustomer==2){
                 for(int i=0;i<Customer.totalCustomers;i++){
                     Customer.customers[i].displayCustomerDetails();
                     System.out.println();
                 }
              }
-             else if(option11==3){
+             else if(optionCustomer==3){
                 System.out.println(" Please enter the customer ID ");
                 int customerIdForSearch = sc.nextInt();
                 sc.nextLine();
@@ -770,7 +772,7 @@ class Main {
                         System.out.println(" The entered Id is not found ");
                     }
              }
-             else if(option11==4){
+             else if(optionCustomer==4){
                 System.out.println(" Please enter the customer ID which you want to update ");
                 int idToUpdateCustomer = sc.nextInt();
                 sc.nextLine();
@@ -809,7 +811,7 @@ class Main {
                        System.out.println(" The Customer doesn't exists "); 
                     }
          }
-         else if(option11==5){
+         else if(optionCustomer==5){
             System.out.println(" Please enter the customer ID which you want to deactivate ");
                 int idToDeactivateCustomer = sc.nextInt();
                 sc.nextLine();
@@ -825,10 +827,11 @@ class Main {
                     }
          }
 
-        }while(option1!=6);
+        }while(optionCustomer!=6);
         
          }
-         else if (option1==2){
+
+        else if(option1==2){
             do{
             System.out.println(" ======================================================== ");
             System.out.println("                  1. Register Restaurant                  ");
@@ -839,21 +842,41 @@ class Main {
             System.out.println("                  6. Close Restaurant                     ");
             System.out.println("                  7. Back                                 ");
             System.out.println(" ======================================================== ");
-            int option11 = sc.nextInt();
+            optionRestaurant = sc.nextInt();
             sc.nextLine();
+            if(optionRestaurant==1){
+                              Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+                              Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 1
 
 
-        }while(option11!=7);
+                              Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
+                              Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 2
+            }
+            else if(optionRestaurant==2){
+                for(int i=0;i<Restaurant.totalRestaurants;i++){
+                    Restaurant.restaurants[i].displayRestaurantDetails();
+                    System.out.println();
+                }
+            }
+            else if(optionRestaurant==3){
+                System.out.println(" Please enter the Id of the Restaurant ");
+                int restaurantId = sc.nextInt();
+                sc.nextLine();
+                boolean restaurantFound = false;
+                   for(int i=0;i<Restaurant.totalRestaurants;i++){
+                    if(Restaurant.restaurants[i].getRestaurantId()==restaurantId){
+                           restaurantFound = true;
+                           Restaurant.restaurants[i].displayRestaurantDetails();
+                    }
+                }
+                if(!restaurantFound){
+                    System.out.println(" You have entered INVALID restaurant ID ");
+                }
+            }
+
+
+        }while(optionRestaurant!=7);
          }
-         
-
-        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
-        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 1
-
-
-        Restaurant.restaurants[Restaurant.totalRestaurants] = new Restaurant(0,null,null,0,0.0,false);
-        Restaurant.restaurants[Restaurant.totalRestaurants].addRestaurant(); //creating a restaurant : 2
-
 
         MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
         MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
