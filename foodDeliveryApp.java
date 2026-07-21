@@ -786,6 +786,7 @@ class Main {
                      System.out.println("               2. Customer's Phone Number                 ");
                      System.out.println("               3. Customer's Address                      ");
                      System.out.println(" ======================================================== ");
+                     System.out.println(" Please choose an option ");
                      int option14 = sc.nextInt();
                      sc.nextLine();
                      if(option14==1){
@@ -873,9 +874,77 @@ class Main {
                     System.out.println(" You have entered INVALID restaurant ID ");
                 }
             }
+             else if(optionRestaurant==4){
+                System.out.println(" Please enter the Restaurant ID which you want to update ");
+                boolean restaurantFound = false;
+                int restaurantIdforUpdate = sc.nextInt();
+                sc.nextLine();
+                for(int i=0;i<Restaurant.totalRestaurants;i++){
+                    if(Restaurant.restaurants[i].getRestaurantId()==restaurantIdforUpdate){
+                        restaurantFound = true;
+                    
+                        System.out.println(" Please enter which thing you want to update ");
+                        System.out.println(" ======================================================== ");
+                        System.out.println("               1. Restaurant's Name                         ");
+                        System.out.println("               2. Restaurant's Rating                       ");
+                        System.out.println("               3. Restaurant's Address                      ");
+                        System.out.println(" ========================================================= ");
+                        System.out.println(" Please choose an option ");
+                        int option41 = sc.nextInt();
+                        sc.nextLine();
+                        if(option41==1){
+                            System.out.println(" Please enter the new name of the restaurant ");
+                            String newName = sc.nextLine();
+                            Restaurant.restaurants[i].changeRestaurantName(newName);
+                        }
+                        else if(option41==2){
+                            System.out.println(" Please enter the new Rating of the restaurant ");
+                            double newRating = sc.nextDouble();
+                            Restaurant.restaurants[i].updateRestaurantRating(newRating);
+                        }
+                        else if (option41==3){
+                            System.out.println(" Please enter the new Address of the restaurant ");
+                            String newLocation = sc.nextLine();
+                            Restaurant.restaurants[i].changeRestaurantLocation(newLocation);
+                        }
+                    }
+                }
+                if(!restaurantFound){
+                    System.out.println(" The Restaurant has not found in the records ");
+                }
+             }
+             else if(optionRestaurant==5){
+                System.out.println(" Please enter the Restaurant ID which you want to open ");
+                boolean restaurantFound = false;
+                int restaurantIdForOpen = sc.nextInt();
+                sc.nextLine();
+                for(int i=0;i<Restaurant.totalRestaurants;i++){
+                    if(Restaurant.restaurants[i].getRestaurantId()==restaurantIdForOpen){
+                        restaurantFound = true;
+                        Restaurant.restaurants[i].openRestaurant();
+             }
+            }
+            if(!restaurantFound){
+                System.out.println(" The restaurant has not found in the records ");
+            }
 
-
-        }while(optionRestaurant!=7);
+        }
+        else if(optionRestaurant==6){
+            System.out.println(" Please enter the Restaurant ID which you want to close ");
+                boolean restaurantFound = false;
+                int restaurantIdForClose = sc.nextInt();
+                sc.nextLine();
+                for(int i=0;i<Restaurant.totalRestaurants;i++){
+                    if(Restaurant.restaurants[i].getRestaurantId()==restaurantIdForClose){
+                        restaurantFound = true;
+                        Restaurant.restaurants[i].closeRestaurant();
+             }
+            }
+            if(!restaurantFound){
+                System.out.println(" The restaurant has not found in the records ");
+            }
+        }
+    }while(optionRestaurant!=7);
          }
 
         MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
