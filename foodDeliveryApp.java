@@ -372,6 +372,7 @@ class MenuItem{
     private String itemCategory;
     private int itemPreparationTime;
     static int totalMenuItems = 0 ;
+    static int updatedMenuItems = 0;
 
     static MenuItem [] menuItems = new MenuItem [10];
 
@@ -730,6 +731,7 @@ class Main {
          System.out.println(" Choose an option : ");
          int optionCustomer;
          int optionRestaurant;
+         int optionMenuItem;
          int option1 = sc.nextInt();
          sc.nextLine();
          if(option1==1){
@@ -946,9 +948,125 @@ class Main {
         }
     }while(optionRestaurant!=7);
          }
+         else if(option1==3){ 
+                             System.out.println(" ======================================================== ");
+                             System.out.println("                  1. Add Menu Item                        ");
+                             System.out.println("                  2. Veiw MenuItem                        ");
+                             System.out.println("                  3. Update Price                         ");
+                             System.out.println("                  4. Mark Available/UnAvailable           ");
+                             System.out.println("                  5. Remove MenuItem                      ");
+                             System.out.println("                  6. Back                                 ");
+                             System.out.println(" ======================================================== ");
+                             System.out.println(" Choose an option ");
+                             optionMenuItem = sc.nextInt();
+                             sc.nextLine();
+                             if(optionMenuItem==1){
+                               MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
+                               MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
+                             }
+                             else if(optionMenuItem==2){
+                                System.out.println(" Please enter the ID of the Item  ");
+                                boolean menuItemFound = false;
+                                 int menuID = sc.nextInt();
+                                 sc.nextLline();
+                                 for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i].getItemId()==menuID){
+                                        menuItemFound = true;
+                                        MenuItem.menuItems[i].displayMenuItem();
+                                    }
+                                 }
+                                 if(!menuItemFound){
+                                    System.out.println(" You have entered InValid Item ID ");
+                                 }
+                             }
+                             else if(optionMenuItem==3){
+                                   System.out.println(" Please enter the ID of the Item for update the Price  ");
+                                 boolean menuItemFound = false;
+                                 int menuID = sc.nextInt();
+                                 sc.nextLline();
+                                 for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i].getItemId()==menuID){
+                                        menuItemFound = true;
+                                        System.out.println(" Please enter the new Price of an Item ");
+                                        double itemNewPrice = sc.nextDouble();
+                                        sc.nextLine();
+                                        MenuItem.menuItems[i].updatePrice(itemNewPrice);
+                                        System.out.println(" Item's Price Updated successfully ");
+                                    }
+                                 }
+                                 if(!menuItemFound){
+                                    System.out.println(" You have entered InValid Item ID ");
+                                 }
+                             }
+                             else if(optionMenuItem==4){
+                              System.out.println(" Please enter select an option ");
+                              System.out.println(" 1. Mark Available ");
+                              System.out.println(" 2. Mark Unavailable ");
+                              int optionForAvailability = sc.nextInt();
+                              sc.nextLine();
+                              if(optionForAvailability==1){
+                                System.out.println(" Please enter the ID of an item ");
+                                boolean itemFound = false; 
+                                int itemID = sc.nextInt();
+                                sc.nextLine();
+                                for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i].getItemId()==itemID){
+                                        MenuItem.menuItems[i].markItemAvailable();
+                                        itemFound = true; 
+                                    }
+                                }
+                                if(!itemFound){
+                                    System.out.println(" You have entered Invalid Item ID ");
+                                }
+                              }
+                              else if(optionForAvailability==2){
+                                System.out.println(" Please enter the ID of an item ");
+                                boolean itemFound = false; 
+                                int itemID = sc.nextInt();
+                                sc.nextLine();
+                                for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i].getItemId()==itemID){
+                                        MenuItem.menuItems[i].markItemUnAvailable();
+                                        itemFound = true; 
+                                    }
+                                }
+                                if(!itemFound){
+                                    System.out.println(" You have entered Invalid Item ID ");
+                                }
+                              }
+                             }
+                             else if(optionMenuItem==5){
+                                System.out.println(" Please enter the ID of an item Which you want to remove ");
+                                boolean itemFound = false; 
+                                int itemID = sc.nextInt();
+                                sc.nextLine();
+                                for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i].getItemId()==itemID){
+                                        MenuItem.menuItems[i] = null;
+                                        itemFound = true; 
+                                    }
+                                }
+                                 for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i]==null){
+                                        MenuItem.menuItems[i] = MenuItem.menuItems[i+1];
+                                    }
+                                }
+                                  for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                    if(MenuItem.menuItems[i]!=null){
+                                        MenuItem.menuItems[i] = MenuItem.menuItems[i+1];
+                                          MenuItem.updatedMenuItems++;
+                                    }
+                                }
+                                 MenuItem.totalMenuItems = MenuItem.updatedMenuItems;
+                                if(!itemFound){
+                                    System.out.println(" You have entered Invalid Item ID ");
+                                }
+                             }
 
-        MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
-        MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();//creating a MenuItem
+         }while(optionMenuItem!=6);
+
+
+       
         MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
         MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
         MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
