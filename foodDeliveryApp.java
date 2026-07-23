@@ -732,6 +732,7 @@ class Main {
          int optionCustomer;
          int optionRestaurant;
          int optionMenuItem;
+         int optionOrder;
          int option1 = sc.nextInt();
          sc.nextLine();
          if(option1==1){
@@ -1046,12 +1047,12 @@ class Main {
                                         itemFound = true; 
                                     }
                                 }
-                                 for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                 for(int i=0;i<MenuItem.totalMenuItems-1;i++){
                                     if(MenuItem.menuItems[i]==null){
                                         MenuItem.menuItems[i] = MenuItem.menuItems[i+1];
                                     }
                                 }
-                                  for(int i=0;i<MenuItem.totalMenuItems;i++){
+                                  for(int i=0;i<MenuItem.totalMenuItems-1;i++){
                                     if(MenuItem.menuItems[i]!=null){
                                         MenuItem.menuItems[i] = MenuItem.menuItems[i+1];
                                           MenuItem.updatedMenuItems++;
@@ -1063,9 +1064,32 @@ class Main {
                                 }
                              }
 
-         }while(optionMenuItem!=6);
+         }while(optionMenuItem!=6); 
 
-
+        else if(option1==4){
+            do{
+             System.out.println(" ======================================================== ");
+             System.out.prinln("                       1. Place Order                         ");
+             System.out.println("                    2. Veiw All Orders                     ");
+             System.out.println("                    3. Search Order                        ");
+             System.out.println("                    4. Confrim Order                       ");
+             System.out.println("                    5. Cancel Order                        ");
+             System.out.println("                    6. Back                                ");
+             System.out.println(" ======================================================== ");
+             System.out.println(" Choose an Option : ");
+             optionOrder = sc.nextInt();
+             sc.nextLine();
+             if(optionOrder==1){
+                 Order.orders[Order.totalOrders] = 
+            new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
+                Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
+                Order.orders[Order.totalOrders].placeOrder();
+                //  Order.orders[Order.totalOrders-1].displayOrderDetails();
+             }
+        }while(optionOrder!=6);
+    }
+        
+    
        
         MenuItem.menuItems[MenuItem.totalMenuItems] = new MenuItem(0,null,0.0,false,null,null,0);
         MenuItem.menuItems[MenuItem.totalMenuItems].addMenuItem();
@@ -1082,13 +1106,6 @@ class Main {
             for (int i=0;i<Restaurant.totalRestaurants;i++) {
                 Restaurant.restaurants[i].displayRestaurantDetails();
             }
-
-            Order.orders[Order.totalOrders] = 
-            new Order(0, Customer.customers[Customer.totalCustomers-1], MenuItem.menuItems[MenuItem.totalMenuItems-1], 
-                Restaurant.restaurants[Restaurant.totalRestaurants-1] ,0, 0.0,null);
-                Order.orders[Order.totalOrders].placeOrder();
-                 Order.orders[Order.totalOrders-1].displayOrderDetails();
-
          
        
     }
